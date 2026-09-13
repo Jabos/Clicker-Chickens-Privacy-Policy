@@ -12,20 +12,35 @@
         ul { padding-left: 20px; }
         a { color: #1a73e8; text-decoration: none; }
         a:hover { text-decoration: underline; }
+        
+        /* El contenedor por defecto oculta, pero el español (#es) se muestra siempre aunque falle JS */
         .lang { display: none; }
+        #es { display: block; }
+        
         .menu { margin-bottom: 25px; }
-        .menu button { margin-right: 8px; margin-bottom: 8px; padding: 8px 14px; cursor: pointer; border: 1px solid #ccc; background-color: #f8f9fa; border-radius: 4px; font-weight: bold; }
-        .menu button:hover { background-color: #e9ecef; }
+        .menu button { 
+            margin-right: 8px; 
+            margin-bottom: 8px; 
+            padding: 8px 16px; 
+            cursor: pointer; 
+            border: 1px solid #ccc; 
+            background-color: #f8f9fa; 
+            border-radius: 4px; 
+            font-weight: bold; 
+            font-size: 0.95rem;
+        }
+        .menu button:hover { background-color: #e2e6ea; }
+        .menu button.active { background-color: #222; color: #fff; border-color: #222; }
         .date { font-style: italic; color: #666; font-size: 0.9rem; margin-bottom: 15px; }
     </style>
 </head>
 <body>
     <div class="menu">
-        <button onclick="setLanguage('es')">Español</button>
-        <button onclick="setLanguage('en')">English</button>
-        <button onclick="setLanguage('fr')">Français</button>
-        <button onclick="setLanguage('pt')">Português</button>
-        <button onclick="setLanguage('ru')">Русский</button>
+        <button id="btn-es" class="active" onclick="setLanguage('es')">Español</button>
+        <button id="btn-en" onclick="setLanguage('en')">English</button>
+        <button id="btn-fr" onclick="setLanguage('fr')">Français</button>
+        <button id="btn-pt" onclick="setLanguage('pt')">Português</button>
+        <button id="btn-ru" onclick="setLanguage('ru')">Русский</button>
     </div>
 
     <!-- ESPAÑOL -->
@@ -170,17 +185,6 @@
 
     <script>
         function setLanguage(lang) {
-            document.querySelectorAll('.lang').forEach(el => el.style.display = 'none');
-            var target = document.getElementById(lang);
-            if (target) {
-                target.style.display = 'block';
-                localStorage.setItem('selectedLanguage', lang);
-            }
-        }
-
-        let userLang = localStorage.getItem('selectedLanguage') || (navigator.language ? navigator.language.substring(0, 2) : 'es');
-        if (!['es', 'en', 'fr', 'pt', 'ru'].includes(userLang)) userLang = 'en';
-        setLanguage(userLang);
-    </script>
-</body>
-</html>
+            // Oculta todas las secciones
+            var sections = document.querySelectorAll('.lang');
+            for (var i = 0; i < sections.
